@@ -1,14 +1,15 @@
 package com.csp.seckill.controller;
 
 import com.csp.seckill.entity.SeckillUser;
+import com.csp.seckill.service.GoodsService;
 import com.csp.seckill.service.SeckillUserService;
-import org.apache.commons.lang3.StringUtils;
+import com.csp.seckill.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @author csp
@@ -21,19 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class GoodsController {
 
     @Autowired
-    private SeckillUserService userService;
+    private GoodsService goodsService;
 
     @RequestMapping("/to_list")
-    public String login(Model model,
-//                        @CookieValue(value = SeckillUserService.COOKIE_NAME, required = false) String cookieToken,
-//                        @RequestParam(value = SeckillUserService.COOKIE_NAME, required = false) String paramToken,
-                        SeckillUser user) {
-//        if (StringUtils.isBlank(cookieToken)&& StringUtils.isBlank(paramToken)) {
-//            return "login";
-//        }
-//        String token = StringUtils.isBlank(paramToken) ? cookieToken : paramToken;
-//        SeckillUser user = userService.getByToken(token);
+    public String login(Model model, SeckillUser user) {
         model.addAttribute("user", user);
+        List<GoodsVo> goodsVoList = goodsService.getGoodsVoList();
+        model.addAttribute("goodsList", goodsVoList);
         return "goods_list";
     }
+
 }
