@@ -15,6 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class GoodsVo extends Goods {
+    private Double seckillPrice;
     private Integer stockCount;
     private Date startDate;
     private Date endDate;

@@ -25,3 +25,5 @@ mybatis:
     default-fetch-size: 100
     default-statement-timeout: 3000
   mapper-locations: classpath:com/csp/seckill/controller/dao/*.xml
+swagger:
+  title: 秒杀项目Swagger文档
