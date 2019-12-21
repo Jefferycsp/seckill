@@ -2,7 +2,6 @@ package com.csp.seckill.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 /**

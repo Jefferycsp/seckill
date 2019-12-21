@@ -28,7 +28,7 @@ public class GoodsController {
     private GoodsService goodsService;
 
     @ApiOperation(value = "登录跳转商品接口")
-    @PostMapping("/to_list")
+    @RequestMapping("/to_list")
     public String login(Model model, SeckillUser user) {
         model.addAttribute("user", user);
         List<GoodsVo> goodsVoList = goodsService.getGoodsVoList();
