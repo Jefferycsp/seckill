@@ -28,7 +28,7 @@
      </tr>  
      <tr>  
         <td>商品图片</td>  
-        <td colspan="2"><img th:src="@{${goods.goodsImg}}" width="200" height="200" /></td>  
+        <td colspan="2"><img th:src="@{${goods.goodsImage}}" width="200" height="200" /></td>
      </tr>
       <tr>  
         <td>订单价格</td>  
@@ -36,7 +36,7 @@
      </tr>
      <tr>
      		<td>下单时间</td>  
-        	<td th:text="${#dates.format(orderInfo.createDate, 'yyyy-MM-dd HH:mm:ss')}" colspan="2"></td>  
+        	<td th:text="${#dates.format(orderInfo.createTime, 'yyyy-MM-dd HH:mm:ss')}" colspan="2"></td>
      </tr>
      <tr>
      	<td>订单状态</td>  

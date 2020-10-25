@@ -34,6 +34,14 @@ public class CodeMsg {
     public static CodeMsg MOBILE_NOT_EXIST = new CodeMsg(500214, "手机号不存在");
     public static CodeMsg PASSWORD_ERROR = new CodeMsg(500215, "密码错误");
 
+
+
+    /**
+     * 秒杀模块 5005XX
+     */
+    public static CodeMsg SEC_KILL_OVER = new CodeMsg(500520, "商品已经秒杀完毕");
+    public static CodeMsg REPEATE_SEC_KILL = new CodeMsg(500521, "商品已经下单");
+
     public CodeMsg fillArgs(Object... args) {
         int code = this.code;
         String message = String.format(this.msg, args);

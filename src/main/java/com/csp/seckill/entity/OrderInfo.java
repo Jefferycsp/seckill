@@ -18,6 +18,6 @@ public class OrderInfo implements Serializable {
 	private Double goodsPrice;
 	private Integer orderChannel;
 	private Integer status;
-	private Date createDate;
-	private Date payDate;
+	private Date createTime;
+	private Date payTime;
 }

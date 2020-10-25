@@ -78,6 +78,7 @@ public class SeckillUserService {
             return null;
         }
         SeckillUser user = (SeckillUser) redisService.get(SeckillUserKey.token, token);
+        // 延迟有效期
         if (user != null) {
             addCookie(response, token, user);
         }
