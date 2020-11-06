@@ -1,6 +1,8 @@
 package com.csp.seckill.controller;
 
+import com.csp.seckill.consts.Constants;
 import com.csp.seckill.entity.OrderInfo;
+import com.csp.seckill.entity.SeckillMessage;
 import com.csp.seckill.entity.SeckillOrder;
 import com.csp.seckill.entity.SeckillUser;
 import com.csp.seckill.result.CodeMsg;
@@ -8,7 +10,9 @@ import com.csp.seckill.service.GoodsService;
 import com.csp.seckill.service.OrderService;
 import com.csp.seckill.service.SeckillService;
 import com.csp.seckill.vo.GoodsVo;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +36,9 @@ public class SeckillController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+
     @RequestMapping("/do_seckill")
     public String list(Model model, SeckillUser user, @RequestParam("goodsId") long goodsId) {
         model.addAttribute("user", user);
@@ -44,6 +51,12 @@ public class SeckillController {
             model.addAttribute("errMsg", CodeMsg.SEC_KILL_OVER.getMsg());
             return "seckill_fail";
         }
+        Gson gson = new Gson();
+        SeckillMessage seckillMessage = new SeckillMessage();
+        seckillMessage.setUserId(user.getId());
+        seckillMessage.setGoodsId(goodsId);
+        kafkaTemplate.send(Constants.TOPIC, gson.toJson(seckillMessage));
+
         // 判断是否已经秒杀到该商品
         SeckillOrder seckillOrder = orderService.getSeckillOrderByUserIdGoodsId(user.getId(), goodsId);
         if (seckillOrder != null) {
