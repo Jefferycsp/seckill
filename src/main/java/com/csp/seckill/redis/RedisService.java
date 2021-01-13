@@ -20,8 +20,6 @@ public class RedisService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-//    private Gson gson = new Gson();
-
     /**
      * 获取key的值
      *
